@@ -1,0 +1,23 @@
+#+ endpoint: https://jpsearch.go.jp/rdf/sparql/
+#+ summary: 利用可能な文化財タイプ一覧
+#+ description: Japan Searchで利用可能な文化財タイプの一覧を取得します
+#+ tags:
+#+   - タイプ一覧
+#+   - メタデータ
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX jps: <https://jpsearch.go.jp/term/>
+
+SELECT DISTINCT ?type ?typeLabel ?count WHERE {
+  {
+    SELECT ?type (COUNT(DISTINCT ?resource) AS ?count) WHERE {
+      ?resource rdf:type ?type .
+      FILTER(STRSTARTS(STR(?type), "https://jpsearch.go.jp/term/type/"))
+    }
+    GROUP BY ?type
+  }
+  OPTIONAL { ?type rdfs:label ?typeLabel }
+}
+ORDER BY DESC(?count)

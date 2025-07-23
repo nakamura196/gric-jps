@@ -4,18 +4,31 @@ Japan SearchのSPARQLエンドポイントを使用したgrlc APIです。
 
 ## 利用可能なエンドポイント
 
-- `/ancient_books` - 古書・古文書の検索
-- `/test_simple` - 基本的なテストクエリ
+- `/search_with_enum` - 文化財タイプ別検索（選択式）
+- `/list_types` - 利用可能な文化財タイプ一覧
 
 ## 使用方法
 
 ```bash
-# 古書・古文書を検索
-curl "http://grlc.io/api-git/nakamura196/gric-jps/ancient_books"
+# 文化財タイプ別検索（デフォルト：絵画）
+curl "http://grlc.io/api-git/nakamura196/grlc-jps/search_with_enum"
 
-# 基本テスト
-curl "http://grlc.io/api-git/nakamura196/gric-jps/test_simple"
+# 特定のタイプを指定して検索
+curl "http://grlc.io/api-git/nakamura196/grlc-jps/search_with_enum?type=https://jpsearch.go.jp/term/type/古書・古文書"
+
+# 利用可能なタイプ一覧を取得
+curl "http://grlc.io/api-git/nakamura196/grlc-jps/list_types"
 ```
+
+### 利用可能な文化財タイプ
+
+- 絵画: `https://jpsearch.go.jp/term/type/絵画`
+- 古書・古文書: `https://jpsearch.go.jp/term/type/古書・古文書`
+- 写真: `https://jpsearch.go.jp/term/type/写真`
+- 彫刻: `https://jpsearch.go.jp/term/type/彫刻`
+- 工芸: `https://jpsearch.go.jp/term/type/工芸`
+- 建造物: `https://jpsearch.go.jp/term/type/建造物`
+- 史跡: `https://jpsearch.go.jp/term/type/史跡`
 
 ## データソース
 

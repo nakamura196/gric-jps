@@ -20,9 +20,11 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 
-SELECT ?resource ?title ?image ?description WHERE {
+SELECT ?resource ?title ?type ?typeLabel ?image ?description WHERE {
   ?resource rdf:type ?_type_iri .
+  BIND(?_type_iri AS ?type)
   OPTIONAL { ?resource rdfs:label ?title }
+  OPTIONAL { ?type rdfs:label ?typeLabel }
   OPTIONAL { ?resource schema:image ?image }
   OPTIONAL { ?resource schema:description ?description }
   FILTER(LANG(?title) = "ja" || LANG(?title) = "")
