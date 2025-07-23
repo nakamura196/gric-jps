@@ -1,8 +1,0 @@
-#+ endpoint: https://jpsearch.go.jp/rdf/sparql/
-#+ summary: 簡単なテストクエリ
-#+ description: 任意のリソース5件を取得するテストクエリ
-
-SELECT ?s ?p ?o WHERE {
-  ?s ?p ?o .
-} 
-LIMIT 5
