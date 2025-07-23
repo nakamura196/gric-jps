@@ -10,14 +10,9 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX jps: <https://jpsearch.go.jp/term/>
 
-SELECT DISTINCT ?type ?typeLabel ?count WHERE {
-  {
-    SELECT ?type (COUNT(DISTINCT ?resource) AS ?count) WHERE {
-      ?resource rdf:type ?type .
-      FILTER(STRSTARTS(STR(?type), "https://jpsearch.go.jp/term/type/"))
-    }
-    GROUP BY ?type
-  }
+SELECT DISTINCT ?type ?typeLabel WHERE {
+  ?resource rdf:type ?type .
+  FILTER(STRSTARTS(STR(?type), "https://jpsearch.go.jp/term/type/"))
   OPTIONAL { ?type rdfs:label ?typeLabel }
 }
-ORDER BY DESC(?count)
+ORDER BY ?typeLabel
