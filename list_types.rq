@@ -5,14 +5,10 @@
 #+   - タイプ一覧
 #+   - メタデータ
 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX jps: <https://jpsearch.go.jp/term/>
+PREFIX jps: <https://jpsearch.go.jp/term/property#>
 
-SELECT DISTINCT ?type ?typeLabel WHERE {
-  ?resource rdf:type ?type .
-  FILTER(STRSTARTS(STR(?type), "https://jpsearch.go.jp/term/type/"))
-  OPTIONAL { ?type rdfs:label ?typeLabel }
-}
-ORDER BY ?typeLabel
+SELECT ?type (COUNT(?cho) as ?count) WHERE {
+	?cho a ?type ;
+		jps:sourceInfo ?source .
+} GROUP BY ?type
+ORDER BY DESC(?count)

@@ -5,7 +5,7 @@ Japan SearchのSPARQLエンドポイントを使用したgrlc APIです。
 ## 利用可能なエンドポイント
 
 - `/search_with_enum` - 文化財タイプ別検索（選択式）
-- `/list_types` - 利用可能な文化財タイプ一覧
+- `/list_types` - 利用可能な文化財タイプ一覧（件数付き）
 
 ## 使用方法
 
