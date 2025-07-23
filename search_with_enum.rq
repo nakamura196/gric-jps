@@ -1,0 +1,29 @@
+#+ endpoint: https://jpsearch.go.jp/rdf/sparql/
+#+ summary: 文化財タイプ別検索（選択式）
+#+ description: プルダウンメニューからタイプを選んで検索
+#+ pagination: 20
+#+ defaults:
+#+   - type: https://jpsearch.go.jp/term/type/絵画
+#+ enumerate:
+#+   - type:
+#+     - https://jpsearch.go.jp/term/type/絵画
+#+     - https://jpsearch.go.jp/term/type/古書・古文書
+#+     - https://jpsearch.go.jp/term/type/写真
+#+     - https://jpsearch.go.jp/term/type/彫刻
+#+     - https://jpsearch.go.jp/term/type/工芸
+#+     - https://jpsearch.go.jp/term/type/建造物
+#+     - https://jpsearch.go.jp/term/type/史跡
+#+ tags:
+#+   - 検索
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?resource ?title ?image ?description WHERE {
+  ?resource rdf:type ?_type_iri .
+  OPTIONAL { ?resource rdfs:label ?title }
+  OPTIONAL { ?resource schema:image ?image }
+  OPTIONAL { ?resource schema:description ?description }
+  FILTER(LANG(?title) = "ja" || LANG(?title) = "")
+} LIMIT 100
